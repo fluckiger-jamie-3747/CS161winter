@@ -1,0 +1,44 @@
+#This program counts lines, words, and characters of a file
+
+#ask user for file, use "testfile.txt" for this example
+file_name = input("What file would you like to open: ")
+
+'''
+#This can be included to allow user input to create a file first
+wf = open(file_name,"w+")
+wf.write("""This is a test file
+that will be used to create and test
+a program that counts lines, words,
+and characters of the file and returns
+the results to the user.""")
+wf.close()
+'''
+
+x=0
+while x==0:
+    try:
+        f = open(file_name,"r")
+        x+=1
+    except FileNotFoundError:
+        file_name = input("Error: file not found, enter a differnt file: ")
+        
+text = f.read()
+print(text)
+lines = len(text.splitlines())   #split text at each new line
+print("This file has", lines, "lines.")
+words = len(text.split())  #split text at spaces
+print("This file has", words, "words.")
+char = len(text)
+print("This file has", char, "characters.")
+f.close()
+
+
+'''
+** notes: if I use text=f.readlines() on line 18 instead of text=f.read()
+I recieve the following error:
+Traceback (most recent call last):
+  File "C:\Users\jamie\Documents\CS 161\Week 5\Lab5_Fluckiger\Lab5_wc_Fluckiger.py", line 20, in <module>
+    lines = len(text.splitlines())   #split text at each new line
+AttributeError: 'list' object has no attribute 'splitlines' 
+Also prints lines into a list with \n characters between.
+'''
